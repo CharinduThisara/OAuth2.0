@@ -58,7 +58,13 @@
 <body>
     <div class="login-container">
         <h2>Login with Google</h2>
-        <a href="/redirect.php" class="login-btn">
+        <?php
+        require_once 'vendor/autoload.php';
+        session_start();
+        $state = bin2hex(random_bytes(16));
+        $_SESSION['oauth2state'] = $state;
+        ?>
+        <a href="redirect.php?state=<?php echo $state; ?>" class="login-btn">
             <div class="n o ku">
                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none" class="ah svg-icon" style="vertical-align: middle;">
                     <g fill-rule="evenodd" clip-rule="evenodd">

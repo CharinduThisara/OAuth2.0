@@ -34,6 +34,19 @@
             font-size: 18px;
         }
 
+        .logout-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -47,6 +60,20 @@
                 $userName = $userInfo->name;
                 echo '<h1>Hello, ' . $userName . '!</h1>';
                 echo '<p>Welcome to Pandora Company Limited.</p>';
+                echo '<form action="" method="post">';
+                echo '<input type="submit" class="logout-btn" name="logout" value="Logout">';
+                echo '</form>';
+
+                // Handle logout
+                if (isset($_POST['logout'])) {
+                    // Unset all of the session variables
+                    $_SESSION = array();
+                    // Destroy the session
+                    session_destroy();
+                    // Redirect to the login page or any other appropriate location after logout
+                    header("Location: login.php");
+                    exit;
+                }
             } else {
                 echo '<p>User name not found.</p>';
             }
